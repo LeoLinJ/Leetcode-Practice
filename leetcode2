@@ -1,0 +1,64 @@
+'''
+AddTwoNUmbers
+给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+'''
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        #创建一个变量储存进位值 1
+        carry = 0
+        finalnode = ListNode(0)
+        currentnode = finalnode #此时两个变量指向同一个链表？
+        while l1 or l2:
+            num1 = l1.val if l1 else 0
+            num2 = l2.val if l2 else 0
+            sum = num1 + num2 + carry
+            carry = sum // 10 # //为取整 %为取余
+            # b = sum % 10
+            currentnode.next = ListNode(sum%10)
+            currentnode = currentnode.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        if carry:
+            currentnode.next = ListNode(carry)
+        # return finalnode.next
+        return finalnode
+
+    def showAnswer(self, l3:ListNode) -> ListNode:
+        answer = []
+        head = l3
+        while head:
+            answer.append(head.val)
+            # print(head.val)
+            head = head.next
+        return answer
+
+list1 = ListNode(0)
+list2 = ListNode(0)
+lista = list1
+listb = list2
+a = input("please input the first list of numbers:")
+b = input("please input the second list of numbers:")
+# a1 = a.split() #one way to have a tuple
+# b1 = list(b)
+a1 = [eval(x) for x in a.split()] #用数字方式创建list
+b1 = [eval(x) for x in b.split()]
+
+for i in range(len(a1)):
+    lista.next = ListNode(a1[i])
+    lista = lista.next
+for i in range(len(b1)):
+    listb.next = ListNode(b1[i])
+    listb = listb.next
+# print(Solution.showAnswer('', list2))
+answer = Solution.addTwoNumbers('',l1=list1, l2=list2)
+answer1 = Solution.showAnswer('', l3 = answer)
+# print(answer1[1:])
+print(answer1)
