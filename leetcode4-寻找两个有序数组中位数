@@ -38,3 +38,17 @@ if __name__ == '__main__':
     B = [3,4]
     target = Solution.findMedianSortedArrays('',A,B)
     print(target)
+
+# 不考虑复杂度：
+# class Solution:
+#     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+#         cur = nums1 + nums2 #合并列表
+#         cur.sort()
+#         a = len(cur)
+#         if a % 2 != 0:
+#             x = cur[a//2]
+#         else:
+#             b = int(a/2)
+#             x = cur[b] + cur[b-1] #list must be integer or slices not float
+#             x = x/2
+#         return x
